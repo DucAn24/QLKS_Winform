@@ -34,11 +34,9 @@
             this.txtTenKhach = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtDiaChiKhach = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtEmailKhach = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtDayCheckin = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -151,22 +149,6 @@
             this.txtEmailKhach.Size = new System.Drawing.Size(232, 42);
             this.txtEmailKhach.TabIndex = 12;
             // 
-            // txtDayCheckin
-            // 
-            this.txtDayCheckin.BorderRadius = 18;
-            this.txtDayCheckin.Checked = true;
-            this.txtDayCheckin.FillColor = System.Drawing.Color.Transparent;
-            this.txtDayCheckin.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtDayCheckin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txtDayCheckin.Location = new System.Drawing.Point(494, 40);
-            this.txtDayCheckin.Margin = new System.Windows.Forms.Padding(2);
-            this.txtDayCheckin.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.txtDayCheckin.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            this.txtDayCheckin.Name = "txtDayCheckin";
-            this.txtDayCheckin.Size = new System.Drawing.Size(245, 31);
-            this.txtDayCheckin.TabIndex = 16;
-            this.txtDayCheckin.Value = new System.DateTime(2024, 10, 11, 13, 2, 36, 288);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -199,17 +181,6 @@
             this.label11.Size = new System.Drawing.Size(63, 17);
             this.label11.TabIndex = 21;
             this.label11.Text = "Địa chỉ";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("MS PGothic", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(491, 20);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(145, 17);
-            this.label4.TabIndex = 22;
-            this.label4.Text = "Ngày nhận phòng";
             // 
             // label3
             // 
@@ -628,11 +599,9 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.txtDayCheckin);
             this.Controls.Add(this.txtDiaChiKhach);
             this.Controls.Add(this.txtEmailKhach);
             this.Controls.Add(this.txtTenKhach);
@@ -654,11 +623,9 @@
         private Guna.UI2.WinForms.Guna2TextBox txtTenKhach;
         private Guna.UI2.WinForms.Guna2TextBox txtDiaChiKhach;
         private Guna.UI2.WinForms.Guna2TextBox txtEmailKhach;
-        private Guna.UI2.WinForms.Guna2DateTimePicker txtDayCheckin;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;

@@ -221,6 +221,19 @@ namespace QuanLiKhachSan
             return dtCustomers;
         }
 
+        public DataTable GetCustomersInHotel()
+        {
+            DataTable dtCustomers = new DataTable();
+            using (SqlCommand cmd = new SqlCommand("SELECT * FROM KhachDangSuDungPhong", getConnectionAdmin))
+            {
+                openConnectionAdmin();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dtCustomers);
+                closeConnectionAdmin();
+            }
+            return dtCustomers;
+        }
+
         public string AddCustomerToRoom(string sdt, int soPhong)
         {
             using (SqlCommand cmd = new SqlCommand("AddCustomerToRoom", getConnectionAdmin))
@@ -258,6 +271,20 @@ namespace QuanLiKhachSan
                 closeConnectionAdmin();
             }
         }
+
+        public DataTable GetInvoiceDetails()
+        {
+            DataTable dtInvoiceDetails = new DataTable();
+            using (SqlCommand cmd = new SqlCommand("SELECT * FROM ViewInvoiceDetails", getConnectionAdmin))
+            {
+                openConnectionAdmin();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dtInvoiceDetails);
+                closeConnectionAdmin();
+            }
+            return dtInvoiceDetails;
+        }
+
 
 
 

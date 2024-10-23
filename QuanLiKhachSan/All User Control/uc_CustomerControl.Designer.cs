@@ -105,7 +105,7 @@
             this.txtSeachAll.ItemHeight = 30;
             this.txtSeachAll.Items.AddRange(new object[] {
             "All-Customer-Details",
-            "In-Hotel-Customer",
+            "Customer-In-Hotel",
             "Check-Out-Customer"});
             this.txtSeachAll.Location = new System.Drawing.Point(756, 28);
             this.txtSeachAll.Margin = new System.Windows.Forms.Padding(2);

@@ -54,7 +54,7 @@ GO
 -- Tạo bảng HOADON
 CREATE TABLE HOADON (
     MaHoaDon INT IDENTITY(1,1) CONSTRAINT PK_HOADON PRIMARY KEY,
-    MaNV INT CONSTRAINT FK_HOADON_NHANVIEN FOREIGN KEY REFERENCES NHANVIEN(MaNV),
+    MaNV INT NULL CONSTRAINT FK_HOADON_NHANVIEN FOREIGN KEY REFERENCES NHANVIEN(MaNV),
     MaKH INT CONSTRAINT FK_HOADON_KHACHHANG FOREIGN KEY REFERENCES KHACHHANG(MaKH),
     NgayNhanPhong DATETIME,
     NgayTraPhong DATETIME,
@@ -64,9 +64,11 @@ CREATE TABLE HOADON (
     CONSTRAINT CK_HOADON_NGAYNHANPHONG CHECK (NgayNhanPhong <= GETDATE()),
     CONSTRAINT CK_HOADON_NGAYTRAPHONG CHECK (NgayTraPhong >= NgayNhanPhong),
     CONSTRAINT CK_HOADON_TONGTIEN CHECK (TongTien >= 0),
-    CONSTRAINT CK_HOADON_TRANGTHAI CHECK (TrangThai IN ('Đang chờ', 'Đã thanh toán', 'Đã hủy'))
+    CONSTRAINT CK_HOADON_TRANGTHAI CHECK (TrangThai IN ('chua-thanh-toan', 'da-thanh-toan'))
 );
 GO
+
+
 
 -- Tạo bảng SUDUNG
 CREATE TABLE SUDUNG (
@@ -320,12 +322,32 @@ BEGIN
     -- Kiểm tra nếu có sự thay đổi trong MaKH
     IF UPDATE(MaKH)
     BEGIN
+        -- Cập nhật trạng thái phòng thành "sudung" nếu MaKH không NULL
         UPDATE PHONG
         SET TinhTrang = 'sudung'
         WHERE MaKH IS NOT NULL AND TinhTrang = 'trong';
+
+        DECLARE @MaKH INT, @MaPhong INT, @MaHoaDon INT, @NgayNhanPhong DATETIME, @TongTien DECIMAL(10, 2);
+
+        -- Lấy thông tin mã khách hàng và mã phòng đã cập nhật
+        SELECT @MaKH = inserted.MaKH, @MaPhong = inserted.MaPhong
+        FROM inserted;
+
+        -- Lấy ngày nhận phòng hiện tại
+        SET @NgayNhanPhong = GETDATE();
+
+        -- Lấy giá phòng để tính tổng tiền (giả sử phòng được tính theo giá của bảng PHONG)
+        SELECT @TongTien = Gia FROM PHONG WHERE MaPhong = @MaPhong;
+
+        -- Tạo hóa đơn mới
+        INSERT INTO HOADON (MaKH, NgayNhanPhong, TongTien, TrangThai)
+        VALUES (@MaKH, @NgayNhanPhong, @TongTien, 'chua-thanh-toan');
     END
 END;
 GO
+
+
+
 
 CREATE PROCEDURE AddServiceToCustomer
     @SDT NVARCHAR(15),
@@ -372,10 +394,49 @@ BEGIN
     VALUES (@MaDichVu, @MaKH, @SoLuong, @TongTien);
 END;
 GO
+ 
+
+CREATE VIEW ViewInvoiceDetails AS
+SELECT 
+    h.MaHoaDon,
+    k.Ten AS TenKhachHang,
+    p.SoPhong,
+    h.NgayNhanPhong,
+    h.NgayTraPhong,
+    SUM(ISNULL(d.Gia, 0) * ISNULL(sd.SoLuong, 0)) AS TongTienDichVu,
+    h.TongTien AS TongTienPhong,
+    ISNULL(km.PhanTramGiam, 0) AS PhanTramGiam,
+    (h.TongTien + SUM(ISNULL(d.Gia, 0) * ISNULL(sd.SoLuong, 0))) * (1 - ISNULL(km.PhanTramGiam, 0) / 100) AS TongTienSauKM,
+    h.TrangThai
+FROM 
+    HOADON h
+    JOIN KHACHHANG k ON h.MaKH = k.MaKH
+    LEFT JOIN PHONG p ON p.MaKH = k.MaKH
+    LEFT JOIN SUDUNG sd ON sd.MaKH = k.MaKH
+    LEFT JOIN DICHVU d ON sd.MaDichVu = d.MaDichVu
+    LEFT JOIN KHUYENMAI km ON km.MaNV = h.MaNV
+-- Bỏ qua điều kiện về ngày khuyến mãi để xem tất cả hóa đơn
+GROUP BY 
+    h.MaHoaDon, k.Ten, p.SoPhong, h.NgayNhanPhong, h.NgayTraPhong, h.TongTien, km.PhanTramGiam, h.TrangThai;
+
+CREATE VIEW KhachDangSuDungPhong AS
+SELECT 
+    k.MaKH,
+    k.Ten AS TenKhachHang,
+    p.SoPhong,
+    p.TenLoaiPhong,      
+    p.Gia,      
+    p.TinhTrang,      
+    p.LoaiGiuong             
+FROM 
+    KHACHHANG k
+JOIN 
+    PHONG p ON k.MaKH = p.MaKH 
+WHERE 
+    p.TinhTrang = 'sudung'; 
 
 
-
-SELECT * FROM KHACHHANG WHERE SDT = '0566345345';
+SELECT * from KhachDangSuDungPhong
 
 
 

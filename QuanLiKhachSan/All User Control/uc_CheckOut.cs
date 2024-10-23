@@ -12,44 +12,27 @@ namespace QuanLiKhachSan.All_User_Control
 {
     public partial class uc_CheckOut : UserControl
     {
+        DBconnection db = new DBconnection();
+
         public uc_CheckOut()
         {
             InitializeComponent();
         }
 
-        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        private void uc_CheckOut_Load(object sender, EventArgs e)
         {
-
+            LoadInvoiceDetails();
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void LoadInvoiceDetails()
         {
-
+            DataTable dtInvoice = db.GetInvoiceDetails();
+            dataGridViewInvoice.DataSource = dtInvoice;
         }
 
-        private void label3_Click(object sender, EventArgs e)
+        private void btnLoad_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void guna2TextBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2TextBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2Button1_Click(object sender, EventArgs e)
-        {
-
+            LoadInvoiceDetails();
         }
     }
 }

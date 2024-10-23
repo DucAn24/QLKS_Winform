@@ -29,6 +29,10 @@ namespace QuanLiKhachSan.All_User_Control
             {
                 LoadAllCustomerDetails();
             }
+            else if (txtSeachAll.SelectedItem.ToString() == "Customer-In-Hotel")
+            {
+                LoadAllCustomerInHotel();
+            }
         }
 
         private void LoadAllCustomerDetails()
@@ -36,6 +40,12 @@ namespace QuanLiKhachSan.All_User_Control
             DataTable dtCustomers = db.GetCustomers();
             dataGridViewAllCustomers.DataSource = dtCustomers;
         }
-    
+        
+
+        private void LoadAllCustomerInHotel()
+        {
+            DataTable dtCustomerInHotel = db.GetCustomersInHotel();
+            dataGridViewAllCustomers.DataSource = dtCustomerInHotel;
+        }
     }
 }
