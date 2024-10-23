@@ -1,0 +1,123 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\winForm\\KS\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1C234B68-E102-4B92-9BF6-0A77114CD04F}|QuanLiKhachSan\\QuanLiKhachSan.csproj|e:\\winform\\ks\\quanlikhachsan\\all user control\\uc_customerreg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C234B68-E102-4B92-9BF6-0A77114CD04F}|QuanLiKhachSan\\QuanLiKhachSan.csproj|solutionrelative:quanlikhachsan\\all user control\\uc_customerreg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C234B68-E102-4B92-9BF6-0A77114CD04F}|QuanLiKhachSan\\QuanLiKhachSan.csproj|e:\\winform\\ks\\quanlikhachsan\\all user control\\uc_customerreg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{1C234B68-E102-4B92-9BF6-0A77114CD04F}|QuanLiKhachSan\\QuanLiKhachSan.csproj|solutionrelative:quanlikhachsan\\all user control\\uc_customerreg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C234B68-E102-4B92-9BF6-0A77114CD04F}|QuanLiKhachSan\\QuanLiKhachSan.csproj|E:\\winForm\\KS\\quanlikhachsan\\dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C234B68-E102-4B92-9BF6-0A77114CD04F}|QuanLiKhachSan\\QuanLiKhachSan.csproj|solutionrelative:quanlikhachsan\\dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C234B68-E102-4B92-9BF6-0A77114CD04F}|QuanLiKhachSan\\QuanLiKhachSan.csproj|e:\\winform\\ks\\quanlikhachsan\\all user control\\uc_customercontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C234B68-E102-4B92-9BF6-0A77114CD04F}|QuanLiKhachSan\\QuanLiKhachSan.csproj|solutionrelative:quanlikhachsan\\all user control\\uc_customercontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C234B68-E102-4B92-9BF6-0A77114CD04F}|QuanLiKhachSan\\QuanLiKhachSan.csproj|e:\\winform\\ks\\quanlikhachsan\\all user control\\uc_addroom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{1C234B68-E102-4B92-9BF6-0A77114CD04F}|QuanLiKhachSan\\QuanLiKhachSan.csproj|solutionrelative:quanlikhachsan\\all user control\\uc_addroom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{74946827-37a0-11d2-a273-00c04f8ef4ff}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UC_CustomerReg.cs",
+              "DocumentMoniker": "E:\\winForm\\KS\\QuanLiKhachSan\\All User Control\\UC_CustomerReg.cs",
+              "RelativeDocumentMoniker": "QuanLiKhachSan\\All User Control\\UC_CustomerReg.cs",
+              "ToolTip": "E:\\winForm\\KS\\QuanLiKhachSan\\All User Control\\UC_CustomerReg.cs",
+              "RelativeToolTip": "QuanLiKhachSan\\All User Control\\UC_CustomerReg.cs",
+              "ViewState": "AgIAANIAAAAAAAAAAAAuwNoAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-23T04:31:54.07Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UC_CustomerReg.cs [Design]",
+              "DocumentMoniker": "E:\\winForm\\KS\\QuanLiKhachSan\\All User Control\\UC_CustomerReg.cs",
+              "RelativeDocumentMoniker": "QuanLiKhachSan\\All User Control\\UC_CustomerReg.cs",
+              "ToolTip": "E:\\winForm\\KS\\QuanLiKhachSan\\All User Control\\UC_CustomerReg.cs [Design]",
+              "RelativeToolTip": "QuanLiKhachSan\\All User Control\\UC_CustomerReg.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-23T04:18:50.116Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DBconnection.cs",
+              "DocumentMoniker": "E:\\winForm\\KS\\QuanLiKhachSan\\DBconnection.cs",
+              "RelativeDocumentMoniker": "QuanLiKhachSan\\DBconnection.cs",
+              "ToolTip": "E:\\winForm\\KS\\QuanLiKhachSan\\DBconnection.cs",
+              "RelativeToolTip": "QuanLiKhachSan\\DBconnection.cs",
+              "ViewState": "AgIAAOIAAAAAAAAAAAAgwPoAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-22T15:02:11.838Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "uc_CustomerControl.cs",
+              "DocumentMoniker": "E:\\winForm\\KS\\QuanLiKhachSan\\All User Control\\uc_CustomerControl.cs",
+              "RelativeDocumentMoniker": "QuanLiKhachSan\\All User Control\\uc_CustomerControl.cs",
+              "ToolTip": "E:\\winForm\\KS\\QuanLiKhachSan\\All User Control\\uc_CustomerControl.cs",
+              "RelativeToolTip": "QuanLiKhachSan\\All User Control\\uc_CustomerControl.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAcwCQAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-23T06:37:39.014Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UC_AddRoom.cs [Design]",
+              "DocumentMoniker": "E:\\winForm\\KS\\QuanLiKhachSan\\All User Control\\UC_AddRoom.cs",
+              "RelativeDocumentMoniker": "QuanLiKhachSan\\All User Control\\UC_AddRoom.cs",
+              "ToolTip": "E:\\winForm\\KS\\QuanLiKhachSan\\All User Control\\UC_AddRoom.cs [Design]",
+              "RelativeToolTip": "QuanLiKhachSan\\All User Control\\UC_AddRoom.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-23T04:47:05.978Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
