@@ -34,5 +34,22 @@ namespace QuanLiKhachSan.All_User_Control
         {
             LoadInvoiceDetails();
         }
+
+        private void btnThanhToan_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string sdt = txtSDTThanhToan.Text;
+                int? maNV = string.IsNullOrWhiteSpace(txtMaNVXuatHoaDon.Text) ? (int?)null : int.Parse(txtMaNVXuatHoaDon.Text);
+
+                db.ThanhToanHoaDon(sdt, maNV);
+                MessageBox.Show("Payment successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadInvoiceDetails(); // Refresh the invoice details
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while processing the payment: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

@@ -234,6 +234,19 @@ namespace QuanLiKhachSan
             return dtCustomers;
         }
 
+        public DataTable GetCustomersCheckOut()
+        {
+            DataTable dtCustomers = new DataTable();
+            using (SqlCommand cmd = new SqlCommand("SELECT * FROM ViewPaidCustomers", getConnectionAdmin))
+            {
+                openConnectionAdmin();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dtCustomers);
+                closeConnectionAdmin();
+            }
+            return dtCustomers;
+        }
+
         public string AddCustomerToRoom(string sdt, int soPhong)
         {
             using (SqlCommand cmd = new SqlCommand("AddCustomerToRoom", getConnectionAdmin))
@@ -284,6 +297,21 @@ namespace QuanLiKhachSan
             }
             return dtInvoiceDetails;
         }
+
+        public void ThanhToanHoaDon(string sdt, int? maNV)
+        {
+            using (SqlCommand cmd = new SqlCommand("ThanhToanHoaDon", getConnectionAdmin))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@SDT", sdt);
+                cmd.Parameters.AddWithValue("@MaNV", (object)maNV ?? DBNull.Value);
+
+                openConnectionAdmin();
+                cmd.ExecuteNonQuery();
+                closeConnectionAdmin();
+            }
+        }
+
 
 
 

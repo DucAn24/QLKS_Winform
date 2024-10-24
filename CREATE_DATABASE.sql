@@ -1,9 +1,9 @@
 -- Tạo cơ sở dữ liệu
-CREATE DATABASE KhachSanDB;
+CREATE DATABASE KhachSan;
 GO
 
 -- Sử dụng cơ sở dữ liệu vừa tạo
-USE KhachSanDB;
+USE KhachSan;
 GO
 
 -- Tạo bảng KHACHSAN
@@ -16,6 +16,20 @@ CREATE TABLE KHACHSAN (
 
     CONSTRAINT CK_KHACHSAN_SDT CHECK (SDT LIKE '[0-9]%' AND LEN(SDT) >= 8),
     CONSTRAINT CK_KHACHSAN_EMAIL CHECK (Email LIKE '%_@__%.__%')
+);
+GO
+
+CREATE TABLE KHACHHANG (
+    MaKH INT IDENTITY(1,1) CONSTRAINT PK_KHACHHANG PRIMARY KEY,
+    Ten NVARCHAR(100) NOT NULL,
+    NgaySinh DATE,
+    DiaChi NVARCHAR(255),
+    SDT NVARCHAR(15) CONSTRAINT UQ_KHACHHANG_SDT UNIQUE,
+    Email NVARCHAR(100) CONSTRAINT UQ_KHACHHANG_EMAIL UNIQUE,
+
+    CONSTRAINT CK_KHACHHANG_NGAYSINH CHECK (NgaySinh <= GETDATE()),
+    CONSTRAINT CK_KHACHHANG_SDT CHECK (SDT LIKE '[0-9]%' AND LEN(SDT) >= 8),
+    CONSTRAINT CK_KHACHHANG_EMAIL CHECK (Email LIKE '%_@__%.__%')
 );
 GO
 
@@ -36,18 +50,23 @@ CREATE TABLE PHONG (
 );
 GO
 
-
-CREATE TABLE KHACHHANG (
-    MaKH INT IDENTITY(1,1) CONSTRAINT PK_KHACHHANG PRIMARY KEY,
-    Ten NVARCHAR(100) NOT NULL,
+-- Tạo bảng NHANVIEN
+CREATE TABLE NHANVIEN (
+    MaNV INT IDENTITY(1,1) CONSTRAINT PK_NHANVIEN PRIMARY KEY,
+    MaKhachSan INT CONSTRAINT FK_NHANVIEN_KHACHSAN FOREIGN KEY REFERENCES KHACHSAN(MaKhachSan),
+    HoTen NVARCHAR(100) NOT NULL,
+    GioiTinh NVARCHAR(10),
     NgaySinh DATE,
+    SDT NVARCHAR(15) CONSTRAINT UQ_NHANVIEN_SDT UNIQUE,
+    Email NVARCHAR(100) CONSTRAINT UQ_NHANVIEN_EMAIL UNIQUE,
     DiaChi NVARCHAR(255),
-    SDT NVARCHAR(15) CONSTRAINT UQ_KHACHHANG_SDT UNIQUE,
-    Email NVARCHAR(100) CONSTRAINT UQ_KHACHHANG_EMAIL UNIQUE,
+    QueQuan NVARCHAR(100),
+    ChucVu NVARCHAR(50) NOT NULL,
 
-    CONSTRAINT CK_KHACHHANG_NGAYSINH CHECK (NgaySinh <= GETDATE()),
-    CONSTRAINT CK_KHACHHANG_SDT CHECK (SDT LIKE '[0-9]%' AND LEN(SDT) >= 8),
-    CONSTRAINT CK_KHACHHANG_EMAIL CHECK (Email LIKE '%_@__%.__%')
+    CONSTRAINT CK_NHANVIEN_NGAYSINH CHECK (NgaySinh <= GETDATE()),
+    CONSTRAINT CK_NHANVIEN_GIOITINH CHECK (GioiTinh IN ('Nam', 'Nữ', 'Khác')),
+    CONSTRAINT CK_NHANVIEN_SDT CHECK (SDT LIKE '[0-9]%' AND LEN(SDT) >= 8),
+    CONSTRAINT CK_NHANVIEN_EMAIL CHECK (Email LIKE '%_@__%.__%')
 );
 GO
 
@@ -68,20 +87,6 @@ CREATE TABLE HOADON (
 );
 GO
 
-
-
--- Tạo bảng SUDUNG
-CREATE TABLE SUDUNG (
-    MaDichVu INT CONSTRAINT FK_SUDUNG_DICHVU FOREIGN KEY REFERENCES DICHVU(MaDichVu),
-    MaKH INT CONSTRAINT FK_SUDUNG_KHACHHANG FOREIGN KEY REFERENCES KHACHHANG(MaKH),
-    SoLuong INT,
-    TongTienDV INT,
-
-    CONSTRAINT PK_SUDUNG PRIMARY KEY (MaDichVu, MaKH),
-    CONSTRAINT CK_SUDUNG_SOLUONG CHECK (SoLuong > 0)
-);
-GO
-
 -- Tạo bảng DICHVU
 CREATE TABLE DICHVU (
     MaDichVu INT IDENTITY(1,1) CONSTRAINT PK_DICHVU PRIMARY KEY,
@@ -93,7 +98,17 @@ CREATE TABLE DICHVU (
     CONSTRAINT CK_DICHVU_GIA CHECK (Gia >= 0)
 );
 GO
+-- Tạo bảng SUDUNG
+CREATE TABLE SUDUNG (
+    MaDichVu INT CONSTRAINT FK_SUDUNG_DICHVU FOREIGN KEY REFERENCES DICHVU(MaDichVu),
+    MaKH INT CONSTRAINT FK_SUDUNG_KHACHHANG FOREIGN KEY REFERENCES KHACHHANG(MaKH),
+    SoLuong INT,
+    TongTienDV INT,
 
+    CONSTRAINT PK_SUDUNG PRIMARY KEY (MaDichVu, MaKH),
+    CONSTRAINT CK_SUDUNG_SOLUONG CHECK (SoLuong > 0)
+);
+GO
 
 -- Tạo bảng KHUYENMAI
 CREATE TABLE KHUYENMAI (
@@ -107,27 +122,6 @@ CREATE TABLE KHUYENMAI (
     CONSTRAINT CK_KHUYENMAI_PHANTRAMGIAM CHECK (PhanTramGiam >= 0 AND PhanTramGiam <= 100),
     CONSTRAINT CK_KHUYENMAI_NGAYBATDAU CHECK (NgayBatDau <= GETDATE()),
     CONSTRAINT CK_KHUYENMAI_NGAYKETTHUC CHECK (NgayKetThuc >= NgayBatDau)
-);
-GO
-
-
--- Tạo bảng NHANVIEN
-CREATE TABLE NHANVIEN (
-    MaNV INT IDENTITY(1,1) CONSTRAINT PK_NHANVIEN PRIMARY KEY,
-    MaKhachSan INT CONSTRAINT FK_NHANVIEN_KHACHSAN FOREIGN KEY REFERENCES KHACHSAN(MaKhachSan),
-    HoTen NVARCHAR(100) NOT NULL,
-    GioiTinh NVARCHAR(10),
-    NgaySinh DATE,
-    SDT NVARCHAR(15) CONSTRAINT UQ_NHANVIEN_SDT UNIQUE,
-    Email NVARCHAR(100) CONSTRAINT UQ_NHANVIEN_EMAIL UNIQUE,
-    DiaChi NVARCHAR(255),
-    QueQuan NVARCHAR(100),
-    ChucVu NVARCHAR(50) NOT NULL,
-
-    CONSTRAINT CK_NHANVIEN_NGAYSINH CHECK (NgaySinh <= GETDATE()),
-    CONSTRAINT CK_NHANVIEN_GIOITINH CHECK (GioiTinh IN ('Nam', 'Nữ', 'Khác')),
-    CONSTRAINT CK_NHANVIEN_SDT CHECK (SDT LIKE '[0-9]%' AND LEN(SDT) >= 8),
-    CONSTRAINT CK_NHANVIEN_EMAIL CHECK (Email LIKE '%_@__%.__%')
 );
 GO
 
@@ -184,12 +178,13 @@ BEGIN
     INSERT INTO PHONG(SoPhong, TenLoaiPhong, LoaiGiuong, Gia, MaKhachSan, TinhTrang)
     VALUES (@SoPhong, @TenLoaiPhong, @LoaiGiuong, @Gia, @MaKhachSan, @TinhTrang)
 END
+GO
 
 CREATE VIEW ViewRooms AS
 SELECT r.SoPhong, r.TenLoaiPhong, r.LoaiGiuong, r.Gia, r.TinhTrang, b.Ten AS BranchName
 FROM PHONG r
 JOIN KHACHSAN b ON r.MaKhachSan = b.MaKhachSan;
-
+GO
 
 CREATE PROCEDURE AddDichVu
     @TenDichVu NVARCHAR(100),
@@ -395,7 +390,6 @@ BEGIN
 END;
 GO
  
-
 CREATE VIEW ViewInvoiceDetails AS
 SELECT 
     h.MaHoaDon,
@@ -415,9 +409,12 @@ FROM
     LEFT JOIN SUDUNG sd ON sd.MaKH = k.MaKH
     LEFT JOIN DICHVU d ON sd.MaDichVu = d.MaDichVu
     LEFT JOIN KHUYENMAI km ON km.MaNV = h.MaNV
--- Bỏ qua điều kiện về ngày khuyến mãi để xem tất cả hóa đơn
+WHERE 
+    h.TrangThai = 'chua-thanh-toan'
 GROUP BY 
     h.MaHoaDon, k.Ten, p.SoPhong, h.NgayNhanPhong, h.NgayTraPhong, h.TongTien, km.PhanTramGiam, h.TrangThai;
+GO
+
 
 CREATE VIEW KhachDangSuDungPhong AS
 SELECT 
@@ -434,9 +431,99 @@ JOIN
     PHONG p ON k.MaKH = p.MaKH 
 WHERE 
     p.TinhTrang = 'sudung'; 
+GO
+
+CREATE PROCEDURE ThanhToanHoaDon
+    @SDT NVARCHAR(15),  -- Thêm SDT của KHACHHANG làm đầu vào
+    @MaNV INT
+AS
+BEGIN
+    DECLARE @MaHoaDon INT;
+
+    -- Tìm mã hóa đơn từ số điện thoại khách hàng
+    SELECT TOP 1 @MaHoaDon = hd.MaHoaDon
+    FROM HOADON hd
+    JOIN KHACHHANG kh ON hd.MaKH = kh.MaKH
+    WHERE kh.SDT = @SDT AND hd.TrangThai = 'chua-thanh-toan'
+    ORDER BY hd.NgayNhanPhong;  -- Ưu tiên hóa đơn gần nhất nếu có nhiều hóa đơn chưa thanh toán
+
+    -- Nếu tìm thấy hóa đơn, cập nhật thông tin
+    IF @MaHoaDon IS NOT NULL
+    BEGIN
+        UPDATE HOADON
+        SET TrangThai = 'da-thanh-toan',
+            NgayTraPhong = GETDATE(),
+            MaNV = @MaNV
+        WHERE MaHoaDon = @MaHoaDon;
+    END
+    ELSE
+    BEGIN
+        PRINT 'Không tìm thấy hóa đơn chưa thanh toán cho số điện thoại này.';
+    END
+END;
+GO
+
+CREATE TRIGGER trg_UpdateRoomStatusAfterPayment
+ON HOADON
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Kiểm tra nếu có sự thay đổi trong trạng thái hóa đơn
+    IF UPDATE(TrangThai)
+    BEGIN
+        DECLARE @MaKH INT;
+        DECLARE @MaPhong INT;
+
+        -- Lấy mã khách hàng từ hóa đơn đã cập nhật
+        SELECT @MaKH = inserted.MaKH
+        FROM inserted
+        WHERE TrangThai = 'da-thanh-toan';
+
+        -- Nếu khách hàng đã thanh toán thì cập nhật trạng thái phòng
+        IF @MaKH IS NOT NULL
+        BEGIN
+            -- Lấy mã phòng của khách hàng
+            SELECT @MaPhong = MaPhong
+            FROM PHONG
+            WHERE MaKH = @MaKH;
+
+            -- Cập nhật trạng thái phòng thành 'trong'
+            UPDATE PHONG
+            SET TinhTrang = 'trong',
+                MaKH = NULL
+            WHERE MaPhong = @MaPhong;
+        END
+    END
+END;
+GO
 
 
-SELECT * from KhachDangSuDungPhong
+CREATE VIEW ViewPaidCustomers AS
+SELECT 
+    h.MaHoaDon,
+    k.Ten AS TenKhachHang,
+    h.NgayNhanPhong,
+    h.NgayTraPhong,
+    SUM(ISNULL(d.Gia, 0) * ISNULL(sd.SoLuong, 0)) AS TongTienDichVu,
+    h.TongTien AS TongTienPhong,
+    ISNULL(km.PhanTramGiam, 0) AS PhanTramGiam,
+    (h.TongTien + SUM(ISNULL(d.Gia, 0) * ISNULL(sd.SoLuong, 0))) * (1 - ISNULL(km.PhanTramGiam, 0) / 100) AS TongTienSauKM,
+    h.TrangThai
+FROM 
+    HOADON h
+    JOIN KHACHHANG k ON h.MaKH = k.MaKH
+    LEFT JOIN SUDUNG sd ON sd.MaKH = k.MaKH
+    LEFT JOIN DICHVU d ON sd.MaDichVu = d.MaDichVu
+    LEFT JOIN KHUYENMAI km ON km.MaNV = h.MaNV
+WHERE 
+    h.TrangThai = 'da-thanh-toan'
+GROUP BY 
+    h.MaHoaDon, k.Ten, h.NgayNhanPhong, h.NgayTraPhong, h.TongTien, km.PhanTramGiam, h.TrangThai;
+GO
+
+
 
 
 
